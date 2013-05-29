@@ -1,0 +1,95 @@
+
+
+.attachment-cruncher .taxonomy>div {
+	margin-bottom: 1em
+}
+
+
+.attachment-cruncher .properties .column-1 {
+	display: inline-block;
+	width: 100px;
+}
+
+.attachment-cruncher .properties .column-2 {
+	display: inline-block;
+	width: 100px;
+}
+
+.attachment-cruncher .properties .column-3 {
+	display: inline-block;
+	width: 100px;
+}
+
+.attachment-cruncher .properties .column-4 {
+	display: inline-block;
+	width: 230px;
+}
+
+.attachment-cruncher .properties .column-5 {
+	display: inline-block;
+	width: 100px;
+}
+
+.attachment-cruncher .properties .column-6 {
+	display: inline-block;
+}
+
+.attachment-cruncher #debug-info {
+	background-color: #444;
+	color: #DDD;
+	padding: 1em;
+}
+
+.attachment-cruncher .taxonomies .column-1 {
+	width: 160px;
+	height: 25px;
+	display: inline-block
+}
+
+.attachment-cruncher .taxonomies .column-2 {
+	width: 80px;
+	display: inline-block
+}
+
+
+
+.attachment-cruncher .meta-name {
+	width: 80px;
+}
+
+.attachment-cruncher .delimiter {
+	width: 60px;
+}
+
+.attachment-cruncher .column-3 span {
+	padding: 0em 0.6em 0em 0.3em
+}
+
+.attachment-cruncher .taxonomy {
+	border-bottom: 1px dotted #DDD;
+	margin-bottom: 1em;
+}
+
+.attachment-cruncher input.taxonomy-name {
+	font-size: 23px;
+}
+
+.attachment-cruncher .remove-taxonomy, .attachment-cruncher input.taxonomy-name {
+	margin: 10px 0px;
+	height: 40px;
+	display: inline-block;
+	vertical-align: top;
+	padding: 12px;
+	line-height: normal;
+}
+
+.attachment-cruncher .info, .attachment-cruncher #debug-info {
+	border-radius: 3px;
+}
+
+.attachment-cruncher .warning {
+	background-color: #ffd3d3;
+	border: 1px solid #e77373;
+	padding: 1em;
+	border-radius: 3px;
+}
