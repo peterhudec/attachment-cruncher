@@ -1,4 +1,4 @@
-=== Image Metadata Cruncher ===
+=== Attachment Cruncher ===
 Contributors: PeterHudec
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NNPNMTTULB3AS
 Tags: media, attachment, attachments, keywords, tags, taxonomy, taxonomies, post, posts, processing
