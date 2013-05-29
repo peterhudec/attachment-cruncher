@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Attachment Cruncher
-Description: None yet
+Description: A Swiss Army Knife for transfering media attachment properties to post properties.
 Version: 0.0
 Author: Peter Hudec
 Author URI: http://peterhudec.com
@@ -17,7 +17,7 @@ class Attachment_Cruncher {
 	private $version = 0.0;
 	private $prefix = 'attachment_cruncher';
 	private $settings_slug = 'attachment-cruncher';
-	private $donate_url = '';
+	private $donate_button_id = 'NNPNMTTULB3AS';
 	
 	private $allow_edit_post_filter = TRUE;
 	
@@ -108,7 +108,7 @@ class Attachment_Cruncher {
 	/**
 	 * Returns IDs of all atachments added to the post content.
 	 */
-	public function get_inline_attachments( $post_id ) {
+	private function get_inline_attachments( $post_id ) {
 		
 		$post = get_post( $post_id );
 		
@@ -129,7 +129,7 @@ class Attachment_Cruncher {
 	/**
 	 * Returns IDs of all atachments attached to the post.
 	 */
-	public function get_attached_attachments( $post_id ) {
+	private function get_attached_attachments( $post_id ) {
 		
 		// Collect attachments objects
 		$attachment_posts = get_posts( array(
@@ -179,7 +179,7 @@ class Attachment_Cruncher {
 	 * @param integer $post_id ID of the post to be crunched.
 	 * @param array $attachment_ids Array of attachment IDs to be used as sources.
 	 */
-	public function attachments_to_post( $post_id, $attachment_ids ) {
+	private function attachments_to_post( $post_id, $attachment_ids ) {
 		$this->crunch_properties( $post_id, $attachment_ids );
 		$this->crunch_metas( $post_id, $attachment_ids );
 		$this->crunch_taxonomies( $post_id, $attachment_ids );
@@ -198,7 +198,7 @@ class Attachment_Cruncher {
 	 * 
 	 * @return string The extracted value.
 	 */
-	public function get_source_value( $source_array, $attachment_ids ) {
+	private function get_source_value( $source_array, $attachment_ids ) {
 		
 		// Dont bother if there is no source or attachments
 		if ( ! isset( $source_array['source'] ) || ! $source_array['source'] || ! $attachment_ids ) {
@@ -296,7 +296,7 @@ class Attachment_Cruncher {
 	 * @param integer $post_id ID of the post to be crunched.
 	 * @param array $attachment_ids Array of attachment IDs to be used as sources.
 	 */
-	public function crunch_properties( $post_id, $attachment_ids ) {
+	private function crunch_properties( $post_id, $attachment_ids ) {
 		
 		$post = get_post( $post_id );
 		
@@ -330,7 +330,7 @@ class Attachment_Cruncher {
 	 * @param integer $post_id ID of the post to be crunched.
 	 * @param array $attachment_ids Array of attachment IDs to be used as source.
 	 */
-	public function crunch_metas( $post_id, $attachment_ids ) {
+	private function crunch_metas( $post_id, $attachment_ids ) {
 		// loop through $this->options['metas']
 		if ( isset( $this->options['metas'] ) && is_array( $this->options['metas'] ) ) {
 			foreach ( $this->options['metas'] as $meta_key => $source_array ) {
@@ -347,7 +347,7 @@ class Attachment_Cruncher {
 	 * @param array $source_array The setting array for the meta key.
 	 * @param array $attachment_ids Array of attachment IDs to be used as source.
 	 */
-	public function crunch_meta( $post_id, $meta_key, $source_array, $attachment_ids ) {
+	private function crunch_meta( $post_id, $meta_key, $source_array, $attachment_ids ) {
 		
 		$value = $this->get_source_value( $source_array, $attachment_ids );
 		add_post_meta( $post_id, $meta_key, $value, TRUE ) || update_post_meta( $post_id, $meta_key, $value	 );
@@ -361,7 +361,7 @@ class Attachment_Cruncher {
 	/**
 	 * Crunches all taxonomies.
 	 */
-	public function crunch_taxonomies( $post_id, $attachment_ids ) {
+	private function crunch_taxonomies( $post_id, $attachment_ids ) {
 		if ( isset( $this->options['taxonomies'] ) ) {
 			foreach ( $this->options['taxonomies'] as $key => $value) {
 				$this->crunch_taxonomy( $key, $post_id, $attachment_ids );
@@ -369,7 +369,7 @@ class Attachment_Cruncher {
 		}
 	}
 	
-	public function test() {
+	private function test() {
 		//$res = $this->get_terms_for_taxonomy( 'post_tag', get_post(5187) );
 		//return gettype($res[0]);
 		$this->crunch_taxonomies( 5137, array(5150) );
@@ -382,7 +382,7 @@ class Attachment_Cruncher {
 	 * @param integer $post_id The ID of post to be crunched.
 	 * @param array $attachment_ids Array of attachment IDs to be used as source.
 	 */
-	public function crunch_taxonomy( $taxonomy, $post_id, $attachment_ids ) {
+	private function crunch_taxonomy( $taxonomy, $post_id, $attachment_ids ) {
 		
 		$post = get_post( $post_id );
 		
@@ -403,7 +403,7 @@ class Attachment_Cruncher {
 	/**
 	 * Returns an array of taxonomy terms for a taxonomy.
 	 */
-	public function get_terms_for_taxonomy( $taxonomy, $attachment_post ) {
+	private function get_terms_for_taxonomy( $taxonomy, $attachment_post ) {
 		
 		$taxonomy_setting = isset( $this->options['taxonomies'][ $taxonomy ] ) ? $this->options['taxonomies'][ $taxonomy ] : null ;
 		
@@ -473,7 +473,7 @@ class Attachment_Cruncher {
 	 * 
 	 * @return array Array of taxonomy term object IDs.
 	 */
-	public function get_terms_for_source( $taxonomy, $value, $delimiter, $handle_as, $create ) {
+	private function get_terms_for_source( $taxonomy, $value, $delimiter, $handle_as, $create ) {
 			
 		// Map handle_as names to wp field names.
 		$fields = array(
@@ -512,7 +512,7 @@ class Attachment_Cruncher {
 	 * 
 	 * @return integer Taxonomy term object ID.
 	 */
-	public function get_or_create_term( $field, $value, $taxonomy, $create ) {
+	private function get_or_create_term( $field, $value, $taxonomy, $create ) {
 		
 		// Get term.
 		$term = get_term_by( $field, $value, $taxonomy );
@@ -551,7 +551,7 @@ class Attachment_Cruncher {
 	    }
 		
 	    if ( $file == $this_plugin ) {
-	    	$url = esc_url( admin_url( "admin.php?page={$this->settings_slug}" ) );
+	    	$url = esc_url( admin_url( "plugins.php?page={$this->settings_slug}" ) );
 	        $settings_link = "<a href=\"$url\">Settings</a>";
 	        array_unshift( $links, $settings_link );
 	    }
@@ -566,7 +566,7 @@ class Attachment_Cruncher {
 	 */
 	public function plugin_row_meta( $links, $file ) {
 		if ( $file == plugin_basename( __FILE__ ) ) {
-			$url = esc_url( admin_url( "admin.php?page={$this->settings_slug}" ) );
+			$url = esc_url( admin_url( "plugins.php?page={$this->settings_slug}" ) );
 	        $links[] = "<a href=\"$url\">Settings</a>";
 			$links[] = "<a href=\"$this->donate_url\">Donate</a>";
 		}
@@ -581,7 +581,7 @@ class Attachment_Cruncher {
 			$this->plugin_name,
 			$this->plugin_name,
 			'manage_options',
-			"{$this->settings_slug}-options",
+			"{$this->settings_slug}",
 			array( $this, 'options_cb' )
 		);
 		
@@ -641,8 +641,8 @@ class Attachment_Cruncher {
 						}
 					}
 				?>
-				<a href="?page=<?php echo $this->settings_slug; ?>-options&tab=settings" class="nav-tab <?php active_tab( 'settings', $active_tab ); ?>">Settings</a>
-				<a href="?page=<?php echo $this->settings_slug; ?>-options&tab=about" class="nav-tab <?php active_tab( 'about', $active_tab ); ?>">About</a>
+				<a href="?page=<?php echo $this->settings_slug; ?>&tab=settings" class="nav-tab <?php active_tab( 'settings', $active_tab ); ?>">Settings</a>
+				<a href="?page=<?php echo $this->settings_slug; ?>&tab=about" class="nav-tab <?php active_tab( 'about', $active_tab ); ?>">About</a>
 			</h2>
 			
 			<?php if ( $active_tab == 'settings' ): ?>
@@ -857,7 +857,7 @@ class Attachment_Cruncher {
 		<p>
 			This plugin is and allways will be free but if you can't help yourself and want to pay for it anyway, you can do so by clicking the button below <strong>:-)</strong><br />
 		</p>
-		<form action="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NNPNMTTULB3AS" method="post">
+		<form action="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=<?php echo $this->donate_button_id; ?>" method="post">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="RJYHYJJD2VKAN">
 			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
