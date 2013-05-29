@@ -5,7 +5,7 @@ Description: A Swiss Army Knife for transfering media attachment properties to p
 Version: 0.0
 Author: Peter Hudec
 Author URI: http://peterhudec.com
-Plugin URI: http://peterhudec.com
+Plugin URI: http://peterhudec.com/programming/2013/05/29/attachment-cruncher-wordpress-plugin
 License: GPL2
 */
 
