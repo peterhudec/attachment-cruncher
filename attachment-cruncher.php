@@ -2,7 +2,7 @@
 /*
 Plugin Name: Attachment Cruncher
 Description: A Swiss Army Knife for transfering media attachment properties to post properties.
-Version: 0.0
+Version: 0.2
 Author: Peter Hudec
 Author URI: http://peterhudec.com
 Plugin URI: http://peterhudec.com/programming/2013/05/29/attachment-cruncher-wordpress-plugin
@@ -14,7 +14,7 @@ License: GPL2
 class Attachment_Cruncher {
 	
 	public $plugin_name = 'Attachment Cruncher';
-	private $version = 0.0;
+	private $version = 0.2;
 	private $prefix = 'attachment_cruncher';
 	private $settings_slug = 'attachment-cruncher';
 	private $donate_button_id = 'NNPNMTTULB3AS';
@@ -612,10 +612,7 @@ class Attachment_Cruncher {
 				'source' => '',
 				'meta' => '',
 			),
-			'metas' => array(
-				'a' => 'title',
-				'b' => 'caption',
-			),
+			'metas' => array(),
 			'taxonomies' => array(),
 		) );
 	}
