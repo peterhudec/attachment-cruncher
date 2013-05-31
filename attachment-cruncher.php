@@ -2,7 +2,7 @@
 /*
 Plugin Name: Attachment Cruncher
 Description: A Swiss Army Knife for transfering media attachment properties to post properties.
-Version: 0.2
+Version: 0.3
 Author: Peter Hudec
 Author URI: http://peterhudec.com
 Plugin URI: http://peterhudec.com/programming/2013/05/29/attachment-cruncher-wordpress-plugin
@@ -14,7 +14,7 @@ License: GPL2
 class Attachment_Cruncher {
 	
 	public $plugin_name = 'Attachment Cruncher';
-	private $version = 0.2;
+	private $version = 0.3;
 	private $prefix = 'attachment_cruncher';
 	private $settings_slug = 'attachment-cruncher';
 	private $donate_button_id = 'NNPNMTTULB3AS';
@@ -129,7 +129,7 @@ class Attachment_Cruncher {
 	/**
 	 * Returns IDs of all atachments attached to the post.
 	 */
-	private function get_attached_attachments( $post_id ) {
+	public function get_attached_attachments( $post_id ) {
 		
 		// Collect attachments objects
 		$attachment_posts = get_posts( array(
@@ -139,10 +139,12 @@ class Attachment_Cruncher {
 			'post_parent' => $post_id
 		) );
 		
-		// Return only IDs.
-		return array_map( function ( $attachment ) {
+		function attachment_id( $attachment ){
 			return $attachment->ID;
-		}, $attachment_posts );
+		}
+		
+		// Return only IDs.
+		return array_map( 'attachment_id', $attachment_posts );
 	}
 	
 	/**

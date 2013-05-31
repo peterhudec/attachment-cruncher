@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: media, attachment, attachments, keywords, tags, taxonomy, taxonomies, post, posts, processing
 Requires at least: 2.7
 Tested up to: 3.5.1
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,13 +61,15 @@ You can also call the plugin public methods from your theme's code:
 == Installation ==
 
 Copy the **attachment-cruncher** folder into the plugins directory and activate.
-PHP 5.3 or higher is required (the plugin uses anonymous functions).
 
 == Screenshots ==
 
 1. Plugin Settings
 
 == Changelog ==
+
+= 0.3 =
+* Works now also with PHP 5.2.
 
 = 0.2 =
 * Removed default post meta "a" and "b".
