@@ -56,7 +56,6 @@ class Attachment_Cruncher {
 	 * Triggered when an attachment is being uploaded or saved.
 	 */
 	 public function edit_attachment( $attachment_id ) {
-	 	error_log( 'ZZZZZZZZZZZZZZZZZZZZZ' );
 	 	if ( $this->allow_edit_post_filter && isset( $this->options['on_attachment_update'] ) && $this->options['on_attachment_update'] ) {
 			$attachment = get_post( $attachment_id );
 			$post_id = $attachment->post_parent;
@@ -90,10 +89,6 @@ class Attachment_Cruncher {
 		            return $location;
 				
 				$this->crunch( $parent_id );
-				
-		        error_log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-				error_log( $parent_id );
-				error_log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 		    }
 		}
 	
